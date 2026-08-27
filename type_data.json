@@ -1,0 +1,173 @@
+[
+  {
+    "typeId": 0,
+    "typeName": "Normal",
+    "damage dealt": {
+      "2": [],
+      "0.5": ["Rock", "Steel"],
+      "0": ["Ghost"]
+    }
+  },
+  {
+    "typeId": 1,
+    "typeName": "Fighting",
+    "damage dealt": {
+      "2": ["Normal", "Rock", "Steel", "Ice", "Dark"],
+      "0.5": ["Flying", "Poison", "Bug", "Psychic", "Fairy"],
+      "0": ["Ghost"]
+    }
+  },
+  {
+    "typeId": 2,
+    "typeName": "Flying",
+    "damage dealt": {
+      "2": ["Fighting", "Bug", "Grass"],
+      "0.5": ["Rock", "Steel", "Electric"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 3,
+    "typeName": "Poison",
+    "damage dealt": {
+      "2": ["Grass", "Fairy"],
+      "0.5": ["Poison", "Ground", "Rock", "Ghost"],
+      "0": ["Steel"]
+    }
+  },
+  {
+    "typeId": 4,
+    "typeName": "Ground",
+    "damage dealt": {
+      "2": ["Poison", "Rock", "Steel", "Fire", "Electric"],
+      "0.5": ["Bug", "Grass"],
+      "0": ["Flying"]
+    }
+  },
+  {
+    "typeId": 5,
+    "typeName": "Rock",
+    "damage dealt": {
+      "2": ["Flying", "Bug", "Fire", "Ice"],
+      "0.5": ["Fighting", "Ground", "Steel"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 6,
+    "typeName": "Bug",
+    "damage dealt": {
+      "2": ["Grass", "Psychic", "Dark"],
+      "0.5": ["Fighting", "Flying", "Poison", "Ghost", "Steel", "Fire", "Fairy"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 7,
+    "typeName": "Ghost",
+    "damage dealt": {
+      "2": ["Ghost", "Psychic"],
+      "0.5": ["Dark"],
+      "0": ["Normal"]
+    }
+  },
+  {
+    "typeId": 8,
+    "typeName": "Steel",
+    "damage dealt": {
+      "2": ["Rock", "Ice", "Fairy"],
+      "0.5": ["Steel", "Fire", "Water", "Electric"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 9,
+    "typeName": "Fire",
+    "damage dealt": {
+      "2": ["Bug", "Steel", "Grass", "Ice"],
+      "0.5": ["Rock", "Fire", "Water", "Dragon"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 10,
+    "typeName": "Water",
+    "damage dealt": {
+      "2": ["Ground", "Rock", "Fire"],
+      "0.5": ["Water", "Grass", "Dragon"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 11,
+    "typeName": "Grass",
+    "damage dealt": {
+      "2": ["Ground", "Rock", "Water"],
+      "0.5": ["Flying", "Poison", "Bug", "Steel", "Fire", "Grass", "Dragon"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 12,
+    "typeName": "Electric",
+    "damage dealt": {
+      "2": ["Flying", "Water"],
+      "0.5": ["Grass", "Electric", "Dragon"],
+      "0": ["Ground"]
+    }
+  },
+  {
+    "typeId": 13,
+    "typeName": "Psychic",
+    "damage dealt": {
+      "2": ["Fighting", "Poison"],
+      "0.5": ["Steel", "Psychic"],
+      "0": ["Dark"]
+    }
+  },
+  {
+    "typeId": 14,
+    "typeName": "Ice",
+    "damage dealt": {
+      "2": ["Flying", "Ground", "Grass", "Dragon"],
+      "0.5": ["Steel", "Fire", "Water", "Ice"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 15,
+    "typeName": "Dragon",
+    "damage dealt": {
+      "2": ["Dragon"],
+      "0.5": ["Steel"],
+      "0": ["Fairy"]
+    }
+  },
+  {
+    "typeId": 16,
+    "typeName": "Dark",
+    "damage dealt": {
+      "2": ["Ghost", "Psychic"],
+      "0.5": ["Fighting", "Dark", "Fairy"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 17,
+    "typeName": "Fairy",
+    "damage dealt": {
+      "2": ["Fighting", "Dragon", "Dark"],
+      "0.5": ["Poison", "Steel", "Fire"],
+      "0": []
+    }
+  },
+  {
+    "typeId": 18,
+    "typeName": "???",
+    "damage dealt": {
+      "2": [],
+      "0.5": [],
+      "0": []
+    }
+  }
+]

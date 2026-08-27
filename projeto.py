@@ -19,7 +19,16 @@ class Type:
         self.superEffective = superEffective
         self.notVeryEffective = notVeryEffective
         self.ineffective = ineffective
-        self.neutral = set(typeIds) - self.superEffective - self.notVeryEffective - self.ineffective
+    def calcEffectiveness(self, targetTypes: list[Type], attackerAbility: None, targetAbility: None) -> float:
+        multiplier = 1
+        for type in targetTypes:
+            if type in self.ineffective:
+                multiplier *= 0
+            elif type in self.superEffective:
+                multiplier *= 2
+            elif type in self.notVeryEffective:
+                multiplier *= 0.5
+        return multiplier
 
 def getInput(inputInstruction: str) -> str:
     while True:
@@ -42,22 +51,11 @@ def isInt(toCheck) -> bool:
     except ValueError:
         return False
 
-def calcTypeEffectiveness(movesetTypes: list[int], targetTypes: list[int], attackerAbility = None, defenderAbilities = None) -> dict:
-    multipliers = {}
-    for attackType in movesetTypes:
-        multiplier = 1.0
-        for effectiveness, types in typeRaw[attackType]["damage dealt"].items():
-            for type in types:
-                if type in targetTypes:
-                    multiplier *= float(effectiveness)
-        multipliers[attackType] = multiplier
-    return multipliers
-
-def printTypeEffectivenessFrequency(movesetTypes: list[int], attackerAbility = None):
+def printTypeEffectivenessFrequency(movesetTypes: list[int], attackerAbility = None) -> tuple[int]:
     ineffective = mostlyIneffective = notVeryEffective = neutral = superEffective = extremelyEffective = 0
     for pokemon in pokemonDict.values():
-        eff = calcTypeEffectiveness(movesetTypes, pokemon.types, attackerAbility)
-        maxEff = max(eff.values())
+        eff = [type.calcEffectiveness(pokemon.types, attackerAbility, pokemon.abilities) for type in movesetTypes]
+        maxEff = max(eff)
         if maxEff == 0:
             ineffective += 1
         elif maxEff <= 0.25:
@@ -81,15 +79,15 @@ def printTypeEffectivenessFrequency(movesetTypes: list[int], attackerAbility = N
 def printTypeEffectivenessTable(movesetTypes: list[int], attackerAbility = None, filter = [0, 0.25, 0.5, 1, 2, 4]):
     print("Target\t\t\t| Target Types\t\t\t| Ability\t\t| Mult\t| Attack Type")
     for pokemon in pokemonDict.values():
-        eff = calcTypeEffectiveness(movesetTypes, pokemon.types, attackerAbility)
-        maxEff = max(eff.values())
-        maxEffTypes = [typeNames[k] for k, v in eff.items() if v == maxEff]
+        eff = [type.calcEffectiveness(pokemon.types, attackerAbility, pokemon.abilities) for type in movesetTypes]
+        maxEff = max(eff)
+        maxEffTypeNames = [movesetTypes[x].name for x in range(len(eff)) if eff[x] == maxEff]
         if maxEff in filter:
             print(f"{pokemon.fullName}" + "\t" * (3 - len(f"{pokemon.fullName}") // 8), end="")
             print(f"| {pokemon.types}" +  "\t" * (4 - len(f"| {pokemon.types}") // 8), end="")
             print("| Any" + "\t" * (3 - len("| Any") // 8), end="")
             print(f"| {maxEff:.2f}"+"\t" * (1 - len(f"| {maxEff:.2f}") // 8), end="")
-            print(f"| {maxEffTypes}")
+            print(f"| {maxEffTypeNames}")
                 
 
 def buildPokemon():
@@ -124,6 +122,7 @@ typeNames = []
 typeIds = []
 typeDict = {}
 filterEff = []
+impactfulAbilities = []
 exit = False
 
 with open("pokemon_data.json") as f:
@@ -153,8 +152,6 @@ for pokemon in pokemonDict.values():
 formCount = len(pokemonDict)
 typesValid = typeNames + typeIds
 
-print(typeDict[1].name)
-
 while True:
     print(MENU)
     option = getInput("Opção: ")
@@ -178,7 +175,7 @@ while True:
                         print("Pelo menos um dos tipos não é válido; verifique.")
                         exit = False
                         break
-                print(attackTypes)
+                    attackTypes[i] = typeDict[attackTypes[i]]
                 if exit: break
             printTypeEffectivenessFrequency(attackTypes)
             if confirm("Imprimir tabela?"):

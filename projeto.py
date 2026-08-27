@@ -19,6 +19,7 @@ class Type:
         self.superEffective = superEffective
         self.notVeryEffective = notVeryEffective
         self.ineffective = ineffective
+        self.neutral = set(typeIds) - self.superEffective - self.notVeryEffective - self.ineffective
 
 def getInput(inputInstruction: str) -> str:
     while True:

@@ -58,7 +58,15 @@
     "typeName": "Bug",
     "damage dealt": {
       "2": ["Grass", "Psychic", "Dark"],
-      "0.5": ["Fighting", "Flying", "Poison", "Ghost", "Steel", "Fire", "Fairy"],
+      "0.5": [
+        "Fighting",
+        "Flying",
+        "Poison",
+        "Ghost",
+        "Steel",
+        "Fire",
+        "Fairy"
+      ],
       "0": []
     }
   },

@@ -88,7 +88,6 @@ def printTypeEffectivenessTable(movesetTypes: list[int], attackerAbility = None,
             print("| Any" + "\t" * (3 - len("| Any") // 8), end="")
             print(f"| {maxEff:.2f}"+"\t" * (1 - len(f"| {maxEff:.2f}") // 8), end="")
             print(f"| {maxEffTypeNames}")
-                
 
 def buildPokemon():
     for pokemon in pokemonRaw:
@@ -107,8 +106,6 @@ def buildPokemon():
 def buildTypes():
     for type in typeRaw:
         typeDict[type["typeId"]] = Type(type["typeId"], type["typeName"], set(type["damage dealt"]["2"]), set(type["damage dealt"]["0.5"]), set(type["damage dealt"]["0"]))
-
-
 
 MENU = """==== Pokémon Coverage Calculator ===
 1. Check type Effectiveness | 2. Check final power | 0. Sair"""

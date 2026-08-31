@@ -1,0 +1,210 @@
+[
+  {
+    "id": 191,
+    "name": "Delta Stream",
+    "defensive": {
+      "effTypes": [["Flying", 2, []]]
+    },
+    "weather": 2,
+    "ignorable": false
+  },
+  {
+    "id": 190,
+    "name": "Desolate Land",
+    "offensive": {
+      "typeMults": [
+        ["Fire", 1.5],
+        ["Water", 0]
+      ]
+    },
+    "defensive": {
+      "typeMults": [
+        ["Fire", 1.5],
+        ["Water", 0]
+      ]
+    },
+    "weather": 2,
+    "ignorable": false
+  },
+  {
+    "id": 87,
+    "name": "Dry Skin",
+    "defensive": {
+      "typeMults": [
+        ["Fire", 1.25],
+        ["Water", 0]
+      ]
+    }
+  },
+  {
+    "id": 297,
+    "name": "Earth Eater",
+    "defensive": {
+      "typeMults": [["Ground", 0]]
+    }
+  },
+  {
+    "id": 111,
+    "name": "Filter",
+    "defensive": {
+      "effMults": [
+        [2, 0.75],
+        [4, 0.75]
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "name": "Flash Fire",
+    "defensive": {
+      "typeMults": [["Fire", 0]]
+    }
+  },
+  {
+    "id": 218,
+    "name": "Fluffy",
+    "defensive": {
+      "typeMults": [["Fire", 2]],
+      "moveMults": [["Contact", 0.5]]
+    }
+  },
+  {
+    "id": 85,
+    "name": "Heatproof",
+    "defensive": {
+      "typeMults": [["Fire", 0.5]]
+    }
+  },
+  {
+    "id": 26,
+    "name": "Levitate",
+    "defensive": {
+      "typeMults": [["Ground", 0]]
+    }
+  },
+  {
+    "id": 31,
+    "name": "Lightning Rod",
+    "defensive": {
+      "typeMults": [["Electric", 0]]
+    }
+  },
+  {
+    "id": 78,
+    "name": "Motor Drive",
+    "defensive": {
+      "typeMults": [["Electric", 0]]
+    }
+  },
+  {
+    "id": 189,
+    "name": "Primordial Sea",
+    "offensive": {
+      "typeMults": [
+        ["Water", 1.5],
+        ["Fire", 0]
+      ]
+    },
+    "defensive": {
+      "typeMults": [
+        ["Water", 1.5],
+        ["Fire", 0]
+      ]
+    },
+    "weather": 2,
+    "ignorable": false
+  },
+  {
+    "id": 232,
+    "name": "Prism Armor",
+    "defensive": {
+      "effMults": [
+        [2, 0.75],
+        [4, 0.75]
+      ]
+    }
+  },
+  {
+    "id": 272,
+    "name": "Purifying Salt",
+    "defensive": {
+      "typeMults": [["Ghost", 0.5]]
+    }
+  },
+  {
+    "id": 157,
+    "name": "Sap Sipper",
+    "defensive": {
+      "typeMults": [["Grass", 0]]
+    }
+  },
+  {
+    "id": 116,
+    "name": "Solid Rock",
+    "defensive": {
+      "effMults": [
+        [2, 0.75],
+        [4, 0.75]
+      ]
+    }
+  },
+  {
+    "id": 114,
+    "name": "Storm Drain",
+    "defensive": {
+      "typeMults": [["Water", 0]]
+    }
+  },
+  {
+    "id": 47,
+    "name": "Thick Fat",
+    "defensive": {
+      "typeMults": [
+        ["Fire", 0.5],
+        ["Ice", 0.5]
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "name": "Volt Absorb",
+    "defensive": {
+      "typeMults": [["Electric", 0]]
+    }
+  },
+  {
+    "id": 11,
+    "name": "Water Absorb",
+    "defensive": {
+      "typeMults": [["Water", 0]]
+    }
+  },
+  {
+    "id": 199,
+    "name": "Water Bubble",
+    "offensive": {
+      "typeMults": [["Water", 2]]
+    },
+    "defensive": {
+      "typeMults": [["Fire", 0.5]]
+    }
+  },
+  {
+    "id": 273,
+    "name": "Well-Baked Body",
+    "defensive": {
+      "typeMults": [["Fire", 0]]
+    }
+  },
+  {
+    "id": 25,
+    "name": "Wonder Guard",
+    "defensive": {
+      "effMults": [
+        [1, 0],
+        [0.5, 0],
+        [0.25, 0]
+      ]
+    }
+  }
+]

@@ -1,12 +1,10 @@
 import json
 import requests
-import numpy
 
 SOURCE_URL = "https://raw.githubusercontent.com/Purukitto/pokemon-data.json/master/pokedex.json"
 OUTPUT_FILE = "pokemon_data.json"
 
 def map_purukitto_to_custom(p):
-    # Base data
     pid = p["id"]
     name = p["name"]["english"]
     types = p["type"]
@@ -17,7 +15,6 @@ def map_purukitto_to_custom(p):
     for ability in abilities_dictlist:
         abilities.append(ability[0])
 
-    # Base form
     base_form = {
         "formName": None,
         "types": types,
@@ -28,15 +25,12 @@ def map_purukitto_to_custom(p):
             "Def": base["Defense"],
             "SpA": base["Sp. Attack"],
             "SpD": base["Sp. Defense"],
-            "Spd": base["Speed"],
+            "Spe": base["Speed"],
         },
         "weight": weight
     }
 
     forms = [base_form]
-
-    # If you want to add Mega forms from elsewhere (e.g. hard‑coded or another JSON),
-    # you can append them here to `forms`.
 
     return {
         "id": pid,

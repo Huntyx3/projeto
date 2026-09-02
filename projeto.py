@@ -264,6 +264,10 @@ while True:
         print(erro)
         input("Altere o ficheiro JSON e tente novamente. Enter para continuar.")
         continue
+    except FileNotFoundError as erro:
+        print(erro)
+        input("Renomeie ou faça download do ficheiro JSON e tente novamente. Enter para continuar.")
+        continue
     break
 
 formCount = len(pokemonList)

@@ -16,7 +16,7 @@ A aplicação usa os dados nos ficheiros type_data.json, pokemon_data.json e abi
 
 Os dados nos ficheiros JSON podem ser alterados pelo utilizador para funcionar em jogos de gerações diferentes, ou fangames que adicionem ou alterem os dados de Pokémon/tipos/abilidades.
 
-A cada execução, o resultado é guardado em resultado.csv. Este ficheiro é substituído a cada utilização. O utilizador deve fazer uma cópia do ficheiro se o pretender guardar.
+A cada execução, o resultado é guardado em resultado.csv. Este ficheiro é substituído a cada execução. O utilizador deve fazer uma cópia do ficheiro se o pretender guardar.
 
 ## MVP e extensões
 

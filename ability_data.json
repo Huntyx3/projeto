@@ -2,29 +2,12 @@
   {
     "id": 191,
     "name": "Delta Stream",
-    "defensive": {
-      "effTypes": [["Flying", 2, []]]
-    },
-    "weather": 2,
-    "ignorable": false
+    "weather": "Strong winds"
   },
   {
     "id": 190,
     "name": "Desolate Land",
-    "offensive": {
-      "typeMults": [
-        ["Fire", 1.5],
-        ["Water", 0]
-      ]
-    },
-    "defensive": {
-      "typeMults": [
-        ["Fire", 1.5],
-        ["Water", 0]
-      ]
-    },
-    "weather": 2,
-    "ignorable": false
+    "weather": "Extremely harsh sunlight"
   },
   {
     "id": 87,
@@ -99,20 +82,7 @@
   {
     "id": 189,
     "name": "Primordial Sea",
-    "offensive": {
-      "typeMults": [
-        ["Water", 1.5],
-        ["Fire", 0]
-      ]
-    },
-    "defensive": {
-      "typeMults": [
-        ["Water", 1.5],
-        ["Fire", 0]
-      ]
-    },
-    "weather": 2,
-    "ignorable": false
+    "weather": "Heavy rain"
   },
   {
     "id": 232,

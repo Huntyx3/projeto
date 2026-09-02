@@ -26,6 +26,6 @@ Extensões irão permitir ter em conta também outros fatores, como abilidades, 
 
 ## Estrutura dos dados utilizados
 
-Ficheiros JSON são lidos e convertidos em dicionários Python, que são posteriormente convertidos em instâncias da respetiva classe. (e.g. cada objeto em type_data.json é convertido numa instância da classe "Type").
+Ficheiros JSON são lidos e convertidos em dicionários Python, que são posteriormente convertidos em instâncias da respetiva classe e armazenados. (e.g. cada objeto em type_data.json é convertido numa instância da classe "Type"). Em simultâneo, são geradas três listas com os Objetos, IDs e Nomes da respetiva classe. Esta estrutura permite conversão por index matching entre os 3 dados.
 
 Os resultados são apresentados como forma de tabela. O resultado pode ser visualizado no terminal, ou através do ficheiro .csv gerado.

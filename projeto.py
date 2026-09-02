@@ -14,7 +14,7 @@ class Pokemon:
         self.fullId = self.id + self.formId
 
     def getRelevantAbilities(self):
-        self.abilities = [abilityDict[abilityIds[abilityNames.index(a)]] for a in self.abilities if a in abilityNames]
+        self.abilities = [abilityList[abilityNames.index(a)] for a in self.abilities if a in abilityNames]
 
 class Type:
     def __init__(self, id: int, name: str, superEffective: list, notVeryEffective: list, ineffective: list):
@@ -123,7 +123,7 @@ def isFloat(toCheck) -> bool:
 
 def printTypeEffectivenessFrequency(movesetTypes: list[int], attackerAbility = None) -> tuple[int]:
     effCounts = {}
-    for pokemon in pokemonDict.values():
+    for pokemon in pokemonList:
         eff = [type.calcEffectiveness(pokemon.types, attackerAbility, pokemon.abilities) for type in movesetTypes]
         maxEff = max(eff)
         effCounts[maxEff] = effCounts.get(maxEff, 0) + 1
@@ -136,7 +136,7 @@ def printTypeEffectivenessTable(movesetTypes: list[int], filter: list[float], at
     print("Target\t\t\t| Target Types\t\t\t| Ability\t\t| Mult\t| Attack Types")
     with open("resultado.csv", "w", encoding="UTF-8") as f:
         f.write("sep=;\nTarget;Target Types;Ability;Mult;Attack Types\n")
-        for pokemon in pokemonDict.values():
+        for pokemon in pokemonList:
             eff = [type.calcEffectiveness(pokemon.types, attackerAbility, pokemon.abilities) for type in movesetTypes]
             maxEff = max(eff)
             maxEffTypeNames = [movesetTypes[x].name for x in range(len(eff)) if eff[x] == maxEff]
@@ -159,7 +159,7 @@ def buildPokemon():
         for form in pokemon["forms"]:
             formName = form.get("formName", "")
             formId = float("." + str(form.get("formId", None)))
-            if id + formId in pokemonDict:
+            if id + formId in pokemonIds:
                 raise ValueError(f"Erro em pokemon_data.json: Pokémon com várias formas com o mesmo ID. Pokémon: {name} {id}")
             fullName = name + formName
             if fullName in pokemonNames:
@@ -167,7 +167,7 @@ def buildPokemon():
             types = form.get("types", pokemon["forms"][0].get("types", []))
             for type in types:
                 if type in typeNames:
-                    type = typeDict[typeIds[typeNames.index(type)]]
+                    type = typeList[typeNames.index(type)]
                 else:
                     raise ValueError(f"Erro em JSON: Existe tipo ({type}) em pokemon_data.json que não existem em type_data.json")
             abilities = form.get("abilities", pokemon["forms"][0].get("abilities", []))
@@ -179,10 +179,10 @@ def buildPokemon():
             bases.append(form["bases"].get("SpD", pokemon["forms"][0]["bases"].get("SpD", 1)))
             bases.append(form["bases"].get("Spe", pokemon["forms"][0]["bases"].get("Spe", 1)))
             weight = form.get("weight", pokemon["forms"][0].get("weight", 0.1))
-            pokemonDict[id + formId] = Pokemon(id, name, formId, formName, types, abilities, bases, weight)
-            pokemonDict[id + formId].getRelevantAbilities()
+            pokemonList.append(Pokemon(id, name, formId, formName, types, abilities, bases, weight))
+            pokemonList[-1].getRelevantAbilities()
             pokemonIds.append(id + formId)
-            pokemonNames.append(pokemonDict[id + formId].fullName)
+            pokemonNames.append(pokemonList[-1].fullName)
         
 
 def buildTypes():
@@ -201,7 +201,7 @@ def buildTypes():
         veryEffective = effs.get("2", [])
         notVeryEffective = effs.get("0.5", [])
         ineffective = effs.get("0", [])
-        typeDict[id] = Type(id, name, list(set(veryEffective)), list(set(notVeryEffective)), list(set(ineffective)))
+        typeList.append(Type(id, name, list(set(veryEffective)), list(set(notVeryEffective)), list(set(ineffective))))
         typeNames.append(name)
         typeIds.append(id)
 
@@ -223,7 +223,7 @@ def buildAbilities():
         terrain = ability.get("terrain", None)
         ignores = ability.get("ignores", False)
         ignorable = ability.get("ignorable", True)
-        abilityDict[id] = Ability(id, name, defensive, offensive, weather, terrain, ignores, ignorable)
+        abilityList.append(Ability(id, name, defensive, offensive, weather, terrain, ignores, ignorable))
         abilityNames.append(name)
         abilityIds.append(id)
 
@@ -233,35 +233,23 @@ MENU = """==== Pokémon Coverage Calculator ===
 yesTuple = ("y", "s", "yes", "sim", "1")
 noTuple = ("n", "no", "nao", "não", "0")
 quitTuple = ("q", "quit", "exit", "close", "sair")
-pokemonRaw = {}
-pokemonDict = {}
-pokemonNames = []
-pokemonIds = []
-typeRaw = {}
-typeNames = []
-typeIds = []
-typeDict = {}
-abilityRaw = {}
-abilityNames = []
-abilityIds = []
-abilityDict = {}
 filterEff = []
 exit = False
 cont = False
 
 while True:
     pokemonRaw = {}
-    pokemonDict = {}
+    pokemonList = []
     pokemonNames = []
     pokemonIds = []
     typeRaw = {}
     typeNames = []
     typeIds = []
-    typeDict = {}
+    typeList = []
     abilityRaw = {}
     abilityNames = []
     abilityIds = []
-    abilityDict = {}
+    abilityList = []
     try:
         with open("pokemon_data.json") as f:
             pokemonRaw = json.load(f)
@@ -278,7 +266,7 @@ while True:
         continue
     break
 
-formCount = len(pokemonDict)
+formCount = len(pokemonList)
 
 while True:
     print(MENU)
@@ -288,7 +276,7 @@ while True:
             break
         case "1":
             while True:
-                print(", ".join(f"{key}: {value.name}" for key, value in typeDict.items()))
+                print(", ".join(f"{t.id}: {t.name}" for t in typeList))
                 attackTypes = getInput("Introduza os tipos dos moves do atacante (separados por \" \". \"q\" para sair): ").replace(",", " ")
                 if attackTypes in quitTuple:
                     cont = True
@@ -299,9 +287,9 @@ while True:
                     if isInt(attackTypes[i]):
                         attackTypes[i] = int(attackTypes[i])
                         if attackTypes[i] in typeIds:
-                            attackTypes[i] = typeDict[attackTypes[i]]
+                            attackTypes[i] = typeList[typeIds.index(attackTypes[i])]
                     elif attackTypes[i] in typeNames:
-                        attackTypes[i] = typeDict[typeIds[typeNames.index(attackTypes[i])]]
+                        attackTypes[i] = typeList[typeNames.index(attackTypes[i])]
                     if not isinstance(attackTypes[i], Type):
                         print(f"{attackTypes[i]} não é um tipo válido. Tente novamente.")
                         exit = False

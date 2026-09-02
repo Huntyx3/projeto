@@ -1,7 +1,12 @@
 [
   {
     "typeId": 0,
-    "typeName": "Normal"
+    "typeName": "Normal",
+    "damage dealt": {
+      "2": [],
+      "0.5": ["Rock", "Steel"],
+      "0": ["Ghost"]
+    }
   },
   {
     "typeId": 1,

@@ -133,17 +133,20 @@ def printTypeEffectivenessFrequency(movesetTypes: list[int], attackerAbility = N
         print(f"{mult}\t{count} / {formCount} = {count / formCount * 100:.1f}%")
 
 def printTypeEffectivenessTable(movesetTypes: list[int], filter: list[float], attackerAbility = None):
-    print("Target\t\t\t| Target Types\t\t\t| Ability\t\t| Mult\t| Attack Type")
-    for pokemon in pokemonDict.values():
-        eff = [type.calcEffectiveness(pokemon.types, attackerAbility, pokemon.abilities) for type in movesetTypes]
-        maxEff = max(eff)
-        maxEffTypeNames = [movesetTypes[x].name for x in range(len(eff)) if eff[x] == maxEff]
-        if maxEff in filter or not filter:
-            print(f"{pokemon.fullName}" + "\t" * (3 - len(f"{pokemon.fullName}") // 8), end="")
-            print(f"| {pokemon.types}" +  "\t" * (4 - len(f"| {pokemon.types}") // 8), end="")
-            print("| Any" + "\t" * (3 - len("| Any") // 8), end="")
-            print(f"| {maxEff:.2f}"+"\t" * (1 - len(f"| {maxEff:.2f}") // 8), end="")
-            print(f"| {maxEffTypeNames}")
+    print("Target\t\t\t| Target Types\t\t\t| Ability\t\t| Mult\t| Attack Types")
+    with open("resultado.csv", "w", encoding="UTF-8") as f:
+        f.write("sep=;\nTarget;Target Types;Ability;Mult;Attack Types\n")
+        for pokemon in pokemonDict.values():
+            eff = [type.calcEffectiveness(pokemon.types, attackerAbility, pokemon.abilities) for type in movesetTypes]
+            maxEff = max(eff)
+            maxEffTypeNames = [movesetTypes[x].name for x in range(len(eff)) if eff[x] == maxEff]
+            if maxEff in filter or not filter:
+                print(f"{pokemon.fullName}" + "\t" * (3 - len(f"{pokemon.fullName}") // 8), end="")
+                print(f"| {pokemon.types}" +  "\t" * (4 - len(f"| {pokemon.types}") // 8), end="")
+                print("| Any" + "\t" * (3 - len("| Any") // 8), end="")
+                print(f"| {maxEff:.2f}"+"\t" * (1 - len(f"| {maxEff:.2f}") // 8), end="")
+                print(f"| {maxEffTypeNames}")
+            f.write(f"{pokemon.fullName};{pokemon.types};Any;{maxEff:.2f};{maxEffTypeNames}\n")
 
 def buildPokemon():
     for pokemon in pokemonRaw:
@@ -226,7 +229,7 @@ def buildAbilities():
 
 
 MENU = """==== Pokémon Coverage Calculator ===
-1. Check type Effectiveness | 2. Check final power | 0. Sair"""
+1. Check type Effectiveness | 0. Sair"""
 yesTuple = ("y", "s", "yes", "sim", "1")
 noTuple = ("n", "no", "nao", "não", "0")
 quitTuple = ("q", "quit", "exit", "close", "sair")
@@ -310,6 +313,7 @@ while True:
                 cont = False
                 continue
             printTypeEffectivenessFrequency(attackTypes)
+            print("Criado \"resultado.csv\" com o resultado. Se pretender guardar, faça uma cópia; o ficheiro é substituído a cada execução.")
             if confirm("Imprimir tabela?"):
                 filter = getInput("Introduza fatores a imprimir (separar por \" \" para selecionar vários, \"a\" para imprimir todos): ").replace(",", " ")
                 filter = filter.split(" ")

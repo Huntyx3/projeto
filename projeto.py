@@ -154,11 +154,16 @@ def buildPokemon():
         name = pokemon.get("name", "")
         if id is None:
             raise ValueError(f"Erro em pokemon_data.json: Pokémon sem ID. Nome: {name}")
+        if not isinstance(id, int) or id < 0:
+            raise ValueError(f"Erro em pokemon_data.json: ID deve ser um número inteiro positivo ou 0. Nome: {name} ID: {id}")
         if not name:
             raise ValueError(f"Erro em pokemon_data.json: Pokémon sem Nome. ID: {id}")
         for form in pokemon["forms"]:
             formName = form.get("formName", "")
-            formId = float("." + str(form.get("formId", None)))
+            formId = form.get("formId", None)
+            if not isinstance(formId, int) or formId < 0:
+                raise ValueError(f"Erro em pokemon_data.json: formID deve ser um número inteiro positivo ou 0. Nome: {name} ID: {id} FormName: {formName} FormId: {formId}")
+            formId = float("." + str(formId))
             if id + formId in pokemonIds:
                 raise ValueError(f"Erro em pokemon_data.json: Pokémon com várias formas com o mesmo ID. Pokémon: {name} {id}")
             fullName = name + formName
@@ -197,6 +202,9 @@ def buildTypes():
             raise ValueError(f"Erro em type_data.json: Existe Tipo com ID repetido. Nome: {name} ID: {id}")
         if name in typeNames:
             raise ValueError(f"Erro em type_data.json: Existe Tipo com nome repetido. Nome: {name} ID: {id}")
+        if not isinstance(id, int) or id < 0:
+            raise ValueError(f"Erro em type_data.json: ID do tipo {name} não é inteiro positivo ou 0.")
+        id = int(id)
         effs = type.get("damage dealt", {})
         veryEffective = effs.get("2", [])
         notVeryEffective = effs.get("0.5", [])
@@ -208,7 +216,7 @@ def buildTypes():
 def buildAbilities():
     for ability in abilityRaw:
         id = ability.get("id", None)
-        name = ability.get("name", "")
+        name = ability.get("name", "").lower()
         if id is None:
             raise ValueError(f"Erro em ability_data.json: Existe Ability sem ID. Nome: {name} ")
         if not name:
@@ -217,6 +225,8 @@ def buildAbilities():
             raise ValueError(f"Erro em ability_data.json: Existe Ability com ID repetido. Nome: {name} ID: {id}")
         if name in abilityNames:
             raise ValueError(f"Erro em ability_data.json: Existe Ability com nome repetido. Nome: {name} ID: {id}")
+        if not isinstance(id, int) or id < 0:
+            raise ValueError(f"Erro em ability_data.json: ID deve ser inteiro positivo ou 0. Ability: {name} ID: {id}")
         offensive = ability.get("offensive", {})
         defensive = ability.get("defensive", {})
         weather = ability.get("weather", None)
@@ -262,17 +272,23 @@ while True:
         buildPokemon()
     except ValueError as erro:
         print(erro)
-        input("Altere o ficheiro JSON e tente novamente. Enter para continuar.")
+        if input("Altere o ficheiro JSON e tente novamente. Enter para continuar, \"q\" para terminar\n") in quitTuple: 
+            exit = True
+            print("A terminar...")
         continue
     except FileNotFoundError as erro:
         print(erro)
-        input("Renomeie ou faça download do ficheiro JSON e tente novamente. Enter para continuar.")
+        if input("Renomeie ou faça download do ficheiro JSON e tente novamente. Enter para continuar, \"q\" para terminar\n") in quitTuple: 
+            exit = True
+            print("A terminar...")
+            break
         continue
     break
 
 formCount = len(pokemonList)
 
 while True:
+    if exit: break
     print(MENU)
     option = getInput("Opção: ")
     match option:

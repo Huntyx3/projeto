@@ -16,14 +16,16 @@ A aplicação usa os dados nos ficheiros type_data.json, pokemon_data.json e abi
 
 Os dados nos ficheiros JSON podem ser alterados pelo utilizador para funcionar em jogos de gerações diferentes, ou fangames que adicionem ou alterem os dados de Pokémon/tipos/abilidades.
 
+A cada execução, o resultado é guardado em resultado.csv. Este ficheiro é substituído a cada utilização. O utilizador deve fazer uma cópia do ficheiro se o pretender guardar.
+
 ## MVP e extensões
 
 O MVP será a possibilidade de obter uma lista de multiplicadores contra todos os Pokémon existentes, tendo em conta apenas uma lista dos tipos de ataque no moveset do atacante e os tipos do alvo. Estes multiplicadores serão apresentados no formato de tabela dentro do terminal.
 
 Extensões irão permitir ter em conta também outros fatores, como abilidades, terreno, tempo meteorológico, STAB, características específicas do ataques.
 
-A cada execução, o resultado é guardado em tabela.csv. Este ficheiro é substituído a cada utilização.
-
 ## Estrutura dos dados utilizados
 
 Ficheiros JSON são lidos e convertidos em dicionários Python, que são posteriormente convertidos em instâncias da respetiva classe. (e.g. cada objeto em type_data.json é convertido numa instância da classe "Type").
+
+Os resultados são apresentados como forma de tabela. O resultado pode ser visualizado no terminal, ou através do ficheiro .csv gerado.

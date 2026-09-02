@@ -20,7 +20,7 @@ A cada execução, o resultado é guardado em resultado.csv. Este ficheiro é su
 
 ## MVP e extensões
 
-O MVP será a possibilidade de obter uma lista de multiplicadores contra todos os Pokémon existentes, tendo em conta apenas uma lista dos tipos de ataque no moveset do atacante e os tipos do alvo. Estes multiplicadores serão apresentados no formato de tabela dentro do terminal.
+O MVP será a possibilidade de obter uma lista de multiplicadores contra todos os Pokémon existentes, tendo em conta apenas uma lista dos tipos de ataque no moveset do atacante e os tipos do alvo. Estes multiplicadores serão apresentados no formato de tabela dentro do terminal e num ficheiro .csv.
 
 Extensões irão permitir ter em conta também outros fatores, como abilidades, terreno, tempo meteorológico, STAB, características específicas do ataques.
 
